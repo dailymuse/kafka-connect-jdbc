@@ -1361,17 +1361,11 @@ public class GenericDatabaseDialect implements DatabaseDialect {
       builder.append(" WHERE ");
     }
 
-    builder.append("id = ?");
-    /*
-    builder.append("(");
     builder.appendList()
-            .delimitedBy(",")
+            .delimitedBy("AND")
             .transformedBy(ExpressionBuilder.columnNames())
-            .of(keyColumns, nonKeyColumns);
-    builder.append(") VALUES(");
-    builder.appendMultiple(",", "?", keyColumns.size() + nonKeyColumns.size());
-    builder.append(")");
-    */
+            .of(keyColumns)
+            .append(" = ? ");
 
     return builder.toString();
   }
